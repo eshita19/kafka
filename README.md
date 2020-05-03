@@ -24,15 +24,18 @@
    
 # Terminologies
   ## Topic: 
-     - A particular stream of data
-     - We can have as many topics as we want.
-     - A topic is identified by its name.
-     - Topics are split into partitions. Each partitions has series of messages with each message at an incremental offset.
-     - For example : 
-       - We are a truck company. Each truck report GPS position to kafka.
-       - We can have a topic truck_gps that contains position of all trucks.
-       - Each truck will send a message to kafka every 20 second, each msg will contain truck id and position.
-       - Consumer of kafka can be many apps like : Location service(real time truck location monitoring) and Notification service(Service which reports if a truck is running to long).
+   - A particular stream of data
+   - We can have as many topics as we want.
+   - A topic is identified by its name.
+   - Topics are split into partitions. Each partitions has series of messages with each message at an incremental offset. Order of messages is guranteeed only within a partition.
+   - For example : 
+     - We are a truck company. Each truck report GPS position to kafka.
+     - We can have a topic truck_gps that contains position of all trucks.
+     - Each truck will send a message to kafka every 20 second, each msg will contain truck id and position.
+     - Consumer of kafka can be many apps like : Location service(real time truck location monitoring) and Notification service(Service which reports if a truck is running to long).
+     - Data in kafka is kept for at max one week, but offset are not reset, it keeps on incrementing.
+     - Once data is written to a partition it cannot be changed.
+     
      
    
  
