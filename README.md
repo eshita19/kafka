@@ -42,6 +42,10 @@
    - If we connect to one broker, we will be connected to all brokers.
    - Topic should have replication factor of atleast 2. The topic partition should be duplicated among brokers, so that if one broker goes down another broker can serve the topic partition.
    - <img src="https://github.com/eshita19/kafka/blob/master/kafka2.png"></img>
+   
+ ## Producer:
+  - Producer sends data to kafka cluster.
+  - 
      
      
    
