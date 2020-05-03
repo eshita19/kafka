@@ -36,6 +36,12 @@
      - Data in kafka is kept for at max one week, but offset are not reset, it keeps on incrementing.
      - Once data is written to a partition it cannot be changed.
      
+  ## Kafka Cluster:
+   - A kafka cluster consist of multiple brokers.
+   - Each broker consist of topic partitions. Partitions from one topic are distributed among the brokers.
+   - If we connect to one broker, we will be connected to all brokers.
+   - <img src="https://github.com/eshita19/kafka/blob/master/kafka2.png"></img>
+     
      
    
  
