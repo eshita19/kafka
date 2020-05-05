@@ -23,6 +23,7 @@
    - Linkedin uses kafka to collect user interaction to make better connection recommendations in real time.
    
 # Terminologies
+  <img src="https://github.com/eshita19/kafka/blob/master/kafka4.png"></img>
   ## Topic: 
    - A particular stream of data
    - We can have as many topics as we want.
@@ -78,6 +79,7 @@
    - It helps in leader election for partitions.
    - The number of zookeeper servers has to be odd number. There can be either 1,3,5,7..
    - <img src="https://github.com/eshita19/kafka/blob/master/kafka3.png"></img>
+   
  
  
    
