@@ -52,6 +52,20 @@
   - The messages will be in order within a partition. But across multiple partition order is not guranteed.
      - If the producer doesn't provider key for messages, data will be sent to brokers in round robin fashion.
      - If the producer send key with message, message will be sent to particular broker using key hashing.
+
+ ## Consumer:
+  - Consumer reads data from broker by topic name.
+  - Consumer knows broker to read from.
+  - Consumer will read data from partitions of a topic in parallel, but within a partition, data will be read in order.
+  - **Consumer groups**: Each consumer within a group reads data from exclusive partition(1 or more but exclusive)
+  - **Consumer offsets**
+    - Similar to git commit.
+    - Kafka stores the offsets at which consumer group has been reading. It will be stored in a kafka topic by name `__consumer_offsets` 
+    - This helps in resuming the reading of data from the last left offset read from consumer offset topic.
+    - Consumer choose when to commit offsets:
+     - *At most once* : Offset is committed as soon as message is read, even if the processing of message might have failed which could lead to data loss.
+     - *At least once*:  Offsets are committed once message has been processed. If the processing goes wrong message will be read again.
+     - *Exactly once*
      
      
      
