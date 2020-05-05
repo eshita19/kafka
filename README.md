@@ -71,6 +71,16 @@
    - Each kafka broker is named as bootstrap broker. Beacuse each broker has metadata of all other brokers,  whoch topic partition each broker hosts.
    - When a kafka client connects to a broker, apart from connection establishment, broker also sends metadata of all brokers, using which kafka client(producer/consumer) can communicate with appropriate broker.
    
+ ## ZoooKeeper
+   - Kafka can't work without zoookeeper.
+   - Zookepper manages the brokers and keeps a list of them.
+   - It notifys kafka, if a broker goes down, broker comes up, new topic, delete topic.
+   - It helps in leader election for partitions.
+   - The number of zookeeper servers has to be odd number. There can be either 1,3,5,7..
+   - <img src="https://github.com/eshita19/kafka/blob/master/kafka3.png"></img>
+ 
+ 
+   
      
      
      
