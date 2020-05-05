@@ -36,6 +36,43 @@
      - Data in kafka is kept for at max one week, but offset are not reset, it keeps on incrementing.
      - Once data is written to a partition it cannot be changed.
      
+  ## Kafka Cluster:
+   - A kafka cluster consist of multiple brokers.
+   - Each broker consist of topic partitions. Partitions from one topic are distributed among the brokers.
+   - If we connect to one broker, we will be connected to all brokers.
+   - Topic should have replication factor of atleast 2. The topic partition should be duplicated among brokers, so that if one broker goes down another broker can serve the topic partition.
+   - <img src="https://github.com/eshita19/kafka/blob/master/kafka2.png"></img>
+   
+ ## Producer:
+  - Producer sends data to kafka cluster.
+  - Producer can choose to receive acknowledgement about data writes.
+     - acks=0 : producer won't wait for ack(Possible data loss)
+     - acks=1 : producer will wait for leader(broker)ack. That is the message was wriiten to leader broker.(limited data loss)
+     - acks=2 : producer will wait for leader + replica broker ack.(no data loss)
+  - The messages will be in order within a partition. But across multiple partition order is not guranteed.
+     - If the producer doesn't provider key for messages, data will be sent to brokers in round robin fashion.
+     - If the producer send key with message, message will be sent to particular broker using key hashing.
+
+ ## Consumer:
+  - Consumer reads data from broker by topic name.
+  - Consumer knows broker to read from.
+  - Consumer will read data from partitions of a topic in parallel, but within a partition, data will be read in order.
+  - **Consumer groups**: Each consumer within a group reads data from exclusive partition(1 or more but exclusive)
+  - **Consumer offsets**
+    - Similar to git commit.
+    - Kafka stores the offsets at which consumer group has been reading. It will be stored in a kafka topic by name `__consumer_offsets` 
+    - This helps in resuming the reading of data from the last left offset read from consumer offset topic.
+    - Consumer choose when to commit offsets:
+     - *At most once* : Offset is committed as soon as message is read, even if the processing of message might have failed which could lead to data loss. Means that for each message handed to the mechanism, that message is delivered zero or one times; in more casual terms it means that messages may be lost.
+     - *At least  once*:  Offsets are committed once message has been processed. If the processing goes wrong message will be read again. Means that for each message handed to the mechanism potentially multiple attempts are made at delivering it, such that at least one succeeds; again, in more casual terms this means that messages may be duplicated but not lost.
+     - *Exactly once*: Means that for each message handed to the mechanism exactly one delivery is made to the recipient; the message can neither be lost nor duplicated.
+     
+  ## Kafka auto broker discovery:
+   - Each kafka broker is named as bootstrap broker. Beacuse each broker has metadata of all other brokers,  whoch topic partition each broker hosts.
+   - When a kafka client connects to a broker, apart from connection establishment, broker also sends metadata of all brokers, using which kafka client(producer/consumer) can communicate with appropriate broker.
+   
+     
+     
      
    
  
