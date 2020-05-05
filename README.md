@@ -67,6 +67,11 @@
      - *At least  once*:  Offsets are committed once message has been processed. If the processing goes wrong message will be read again. Means that for each message handed to the mechanism potentially multiple attempts are made at delivering it, such that at least one succeeds; again, in more casual terms this means that messages may be duplicated but not lost.
      - *Exactly once*: Means that for each message handed to the mechanism exactly one delivery is made to the recipient; the message can neither be lost nor duplicated.
      
+  ## Kafka auto broker discovery:
+   - Each kafka broker is named as bootstrap broker. Beacuse each broker has metadata of all other brokers,  whoch topic partition each broker hosts.
+   - When a kafka client connects to a broker, apart from connection establishment, broker also sends metadata of all brokers, using which kafka client(producer/consumer) can communicate with appropriate broker.
+   
+     
      
      
    
