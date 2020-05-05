@@ -45,7 +45,14 @@
    
  ## Producer:
   - Producer sends data to kafka cluster.
-  - 
+  - Producer can choose to receive acknowledgement about data writes.
+     - acks=0 : producer won't wait for ack(Possible data loss)
+     - acks=1 : producer will wait for leader(broker)ack. That is the message was wriiten to leader broker.(limited data loss)
+     - acks=2 : producer will wait for leader + replica broker ack.(no data loss)
+  - The messages will be in order within a partition. But across multiple partition order is not guranteed.
+     - If the producer doesn't provider key for messages, data will be sent to brokers in round robin fashion.
+     - If the producer send key with message, message will be sent to particular broker using key hashing.
+     
      
      
    
