@@ -63,9 +63,9 @@
     - Kafka stores the offsets at which consumer group has been reading. It will be stored in a kafka topic by name `__consumer_offsets` 
     - This helps in resuming the reading of data from the last left offset read from consumer offset topic.
     - Consumer choose when to commit offsets:
-     - *At most once* : Offset is committed as soon as message is read, even if the processing of message might have failed which could lead to data loss.
-     - *At least once*:  Offsets are committed once message has been processed. If the processing goes wrong message will be read again.
-     - *Exactly once*
+     - *At most once* : Offset is committed as soon as message is read, even if the processing of message might have failed which could lead to data loss. Means that for each message handed to the mechanism, that message is delivered zero or one times; in more casual terms it means that messages may be lost.
+     - *At least  once*:  Offsets are committed once message has been processed. If the processing goes wrong message will be read again. Means that for each message handed to the mechanism potentially multiple attempts are made at delivering it, such that at least one succeeds; again, in more casual terms this means that messages may be duplicated but not lost.
+     - *Exactly once*: Means that for each message handed to the mechanism exactly one delivery is made to the recipient; the message can neither be lost nor duplicated.
      
      
      
