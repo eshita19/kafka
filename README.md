@@ -80,6 +80,12 @@
    - The number of zookeeper servers has to be odd number. There can be either 1,3,5,7..
    - <img src="https://github.com/eshita19/kafka/blob/master/kafka3.png"></img>
    
+ ## Starting Kafka:
+  - Download apache-kafka. Add apache-kafka/bin to Path.
+  - Start zookeper: `zookeeper-server-start.sh config/zookeeper.properties`
+  - Start Kafka: `kafka-server-start config/server.properties`
+   
+   
  
  
    
