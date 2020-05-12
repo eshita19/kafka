@@ -96,7 +96,7 @@
        - To read messages from beginning add option: `--from beginning`.
        - To define consumer group: `--group 1`.
   - **Consumer Group CLIs**:
-     - See all the consumers within a consumer group: `kafka-consumer-group.sh --bootrap-server localhost:9092 --topic first_topic --group group1 --describe`
+     - See all the consumers within a consumer group: `kafka-consumer-group.sh --bootrap-server localhost:9092 --group group1 --describe`
       
    
    
