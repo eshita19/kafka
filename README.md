@@ -90,6 +90,9 @@
       - Description of a topic: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --describe`
       - Delete topic: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --delete`
   - **Producer CLIs**:
+      - Push messages to an existing/new topic. If the topic doesn't exist, it will be created with default log partitions from server.properties. `--broker-list` is the IP and port of kafka broker : `kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic`.
+  - **Consumer CLIs**:
+      - Consumer message from a topic. `--bootstrap-server` is the kafka broker. `kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic`. This will read messages live. To read messages from beginning add option: `--from beginning`.
       
    
    
