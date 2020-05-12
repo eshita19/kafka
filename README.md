@@ -84,11 +84,13 @@
   - Download apache-kafka. Add apache-kafka/bin to Path.
   - Start zookeper: `zookeeper-server-start.sh config/zookeeper.properties`
   - Start Kafka: `kafka-server-start.sh config/server.properties`
-  - Topic CLIS:
+  - **Topic CLIs**:
       - Create topic: `kafka-topics.sh --zoookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 --replication-factor 2`
       - List topics: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --list`
       - Description of a topic: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --describe`
       - Delete topic: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --delete`
+  - **Producer CLIs**:
+      
    
    
  
