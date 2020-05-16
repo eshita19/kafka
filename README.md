@@ -57,8 +57,10 @@
  ## Consumer:
   - Consumer reads data from broker by topic name.
   - Consumer knows broker to read from.
-  - Consumer will read data from partitions of a topic in parallel, but within a partition, data will be read in order.
-  - **Consumer groups**: Each consumer within a group reads data from exclusive partition(1 or more but exclusive)
+  - Consumer will read data from partitions of a topic in parallel, but within a partition, data will be read in order. 
+  - **Consumer groups**: 
+     - Each consumer within a group reads data from exclusive partition(1 or more but exclusive).
+     - When a new consumer joins/removed from consumer group, the partitions are rea-assigned. 
   - **Consumer offsets**
     - Similar to git commit.
     - Kafka stores the offsets at which consumer group has been reading. It will be stored in a kafka topic by name `__consumer_offsets` 
