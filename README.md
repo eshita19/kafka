@@ -102,6 +102,9 @@
   - **Resetting offsets**:
     - `kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group group1 --topic first_topic --reset-offsets --to-earliest`
     - Option `--shift-by` : Left shift(-) or right shift the offset in each partition. 
+    
+### Interview Questions:
+https://data-flair.training/blogs/kafka-interview-questions/
       
    
    
