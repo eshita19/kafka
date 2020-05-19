@@ -51,6 +51,8 @@
      - acks=1(kafka default) : producer will wait for leader(broker)ack. That is the message was wriiten to leader broker.(limited data loss)
      - acks=2 : producer will wait for leader + replica broker ack.(no data loss)
        - `min.insync.replicas`: The leader will send an exception to Kafka producer if it does not get acknoowledgmenet from at least min.insync.replicas number of followers.
+       - `retry-backoff-ms` and `delivery-timeout-ms`: In case of replication exception, every retry-backoff-ms, the producer will retry to send data to kafka. The producer will retry till `delivery-timeout-ms` and then will send timeout.
+       - 
   - The messages will be in order within a partition. But across multiple partition order is not guranteed.
      - If the producer doesn't provider key for messages, data will be sent to brokers in round robin fashion.
      - If the producer send key with message, message will be sent to particular broker using key hashing.
