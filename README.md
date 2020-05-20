@@ -53,6 +53,7 @@
        - `min.insync.replicas`: The leader will send an exception to Kafka producer if it does not get acknoowledgmenet from at least min.insync.replicas number of followers.
        - `retry-backoff-ms` and `delivery-timeout-ms`: In case of replication exception, every retry-backoff-ms, the producer will retry to send data to kafka. The producer will retry till `delivery-timeout-ms` and then fail record.
        - `max.in.flight.requests.per.connection`: how many producer requests can be sent in parallel.
+       - `enable.idempotence`: This will enable idempotent Producer. It means even if Producer sends a message multiple times to Kafka, due to acks message missed due to network error, Kafka handles it. Producer sends request id for each message. If the message with same request id is received by kafka, the message is not committed, but ack is sent to Producer, so that it stops retrying.
   - The messages will be in order within a partition. But across multiple partition order is not guranteed.
      - If the producer doesn't provider key for messages, data will be sent to brokers in round robin fashion.
      - If the producer send key with message, message will be sent to particular broker using key hashing.
