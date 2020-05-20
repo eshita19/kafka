@@ -23,6 +23,7 @@
    - Linkedin uses kafka to collect user interaction to make better connection recommendations in real time.
    
 # Terminologies
+  <img src="https://github.com/eshita19/kafka/blob/master/kafka4.png"></img>
   ## Topic: 
    - A particular stream of data
    - We can have as many topics as we want.
@@ -47,8 +48,20 @@
   - Producer sends data to kafka cluster.
   - Producer can choose to receive acknowledgement about data writes.
      - acks=0 : producer won't wait for ack(Possible data loss)
-     - acks=1 : producer will wait for leader(broker)ack. That is the message was wriiten to leader broker.(limited data loss)
+     - acks=1(kafka default) : producer will wait for leader(broker)ack. That is the message was wriiten to leader broker.(limited data loss)
      - acks=2 : producer will wait for leader + replica broker ack.(no data loss)
+       - `min.insync.replicas`: The leader will send an exception to Kafka producer if it does not get acknoowledgmenet from at least min.insync.replicas number of followers.
+       - `retry-backoff-ms` and `delivery-timeout-ms`: In case of replication exception, every retry-backoff-ms, the producer will retry to send data to kafka. The producer will retry till `delivery-timeout-ms` and then fail record.
+       - `max.in.flight.requests.per.connection`: how many producer requests can be sent in parallel.
+       - `enable.idempotence`: This will enable idempotent Producer. It means even if Producer sends a message multiple times to Kafka, due to acks message missed due to network error, Kafka handles it. Producer sends request id for each message. If the message with same request id is received by kafka, the message is not committed, but ack is sent to Producer, so that it stops retrying.
+       - `compression.type`: Message sent by Producer will be compressed. Multiple messages can be sent in batches.
+       - `linger.ms`: Batching of messages provides higher throughput with less latency. linger.ms is the time Producer waits before sending messages. The more time it waits, it might batch more messages which can be compressed and sent.
+       
+  - *Settings for a safe Producer*: Safe producer which is durable, no data loss
+     - `acks = all` (Wait for acknowldgement from leader ans other replica brokers)
+     - `max.in.flight.requests.per.connection` : 5 ( kafka >1.1)
+     - `enable.idemptonce: true`: Prevents duplicate message sent to kafka.
+     - `retries:Integer.max`: max number of retries.
   - The messages will be in order within a partition. But across multiple partition order is not guranteed.
      - If the producer doesn't provider key for messages, data will be sent to brokers in round robin fashion.
      - If the producer send key with message, message will be sent to particular broker using key hashing.
@@ -56,8 +69,10 @@
  ## Consumer:
   - Consumer reads data from broker by topic name.
   - Consumer knows broker to read from.
-  - Consumer will read data from partitions of a topic in parallel, but within a partition, data will be read in order.
-  - **Consumer groups**: Each consumer within a group reads data from exclusive partition(1 or more but exclusive)
+  - Consumer will read data from partitions of a topic in parallel, but within a partition, data will be read in order. 
+  - **Consumer groups**: 
+     - Each consumer within a group reads data from exclusive partition(1 or more but exclusive).
+     - When a new consumer joins/removed from consumer group, the partitions are rea-assigned. 
   - **Consumer offsets**
     - Similar to git commit.
     - Kafka stores the offsets at which consumer group has been reading. It will be stored in a kafka topic by name `__consumer_offsets` 
@@ -78,6 +93,41 @@
    - It helps in leader election for partitions.
    - The number of zookeeper servers has to be odd number. There can be either 1,3,5,7..
    - <img src="https://github.com/eshita19/kafka/blob/master/kafka3.png"></img>
+   
+ ## Starting Kafka:
+  - Download apache-kafka. Add apache-kafka/bin to Path.
+  - Start zookeper: `zookeeper-server-start.sh config/zookeeper.properties`
+  - Start Kafka: `kafka-server-start.sh config/server.properties`
+  - **Topic CLIs**:
+      - Create topic: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 --replication-factor 2`
+      - List topics: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --list`
+      - Description of a topic: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --describe`
+      - Delete topic: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --delete`
+  - **Producer CLIs**:
+      - Push messages to an existing/new topic. If the topic doesn't exist, it will be created with default log partitions from server.properties. `--broker-list` is the IP and port of kafka broker : `kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic`.
+  - **Consumer CLIs**:
+      - Consumer message from a topic. `--bootstrap-server` is the kafka broker. `kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic`. This will read messages live. 
+       - To read messages from beginning add option: `--from beginning`.
+       - To define consumer group: `--group 1`.
+  - **Consumer Group CLIs**:
+     - See all the consumers within a consumer group: `kafka-consumer-group.sh --bootrap-server localhost:9092 --group group1 --describe`
+  - **Resetting offsets**:
+    - `kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group group1 --topic first_topic --reset-offsets --to-earliest`
+    - Option `--shift-by` : Left shift(-) or right shift the offset in each partition. 
+    
+
+## Twitter application:
+- https://developer.twitter.com/en/apps.
+- Twitter client: https://github.com/twitter/hbc.
+
+
+## Interview Questions:
+- https://data-flair.training/blogs/kafka-interview-questions/
+
+
+      
+   
+   
  
  
    
