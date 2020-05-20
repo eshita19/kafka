@@ -120,6 +120,8 @@
 - https://developer.twitter.com/en/apps.
 - Twitter client: https://github.com/twitter/hbc.
 
+## Java Project: 
+- https://github.com/eshita19/kafka/tree/master/kafka-proj
 
 ## Interview Questions:
 - https://data-flair.training/blogs/kafka-interview-questions/
