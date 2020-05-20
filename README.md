@@ -54,6 +54,9 @@
        - `retry-backoff-ms` and `delivery-timeout-ms`: In case of replication exception, every retry-backoff-ms, the producer will retry to send data to kafka. The producer will retry till `delivery-timeout-ms` and then fail record.
        - `max.in.flight.requests.per.connection`: how many producer requests can be sent in parallel.
        - `enable.idempotence`: This will enable idempotent Producer. It means even if Producer sends a message multiple times to Kafka, due to acks message missed due to network error, Kafka handles it. Producer sends request id for each message. If the message with same request id is received by kafka, the message is not committed, but ack is sent to Producer, so that it stops retrying.
+       - `compression.type`: Message sent by Producer will be compressed. Multiple messages can be sent in batches.
+       - `linger.ms`: Batching of messages provides higher throughput with less latency. linger.ms is the time Producer waits before sending messages. The more time it waits, it might batch more messages which can be compressed and sent.
+       
   - *Settings for a safe Producer*: Safe producer which is durable, no data loss
      - `acks = all` (Wait for acknowldgement from leader ans other replica brokers)
      - `max.in.flight.requests.per.connection` : 5 ( kafka >1.1)
