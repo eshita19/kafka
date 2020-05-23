@@ -99,7 +99,7 @@
  ## Starting Kafka:
   - Download apache-kafka. Add apache-kafka/bin to Path.
   - Start zookeper: `zookeeper-server-start.sh config/zookeeper.properties`
-  - Start Kafka: `kafka-server-start.sh config/server.properties`
+  - Start Kafka: `kafka-server-start.sh config/server.properties`. Start multiple broker: https://www.michael-noll.com/blog/2013/03/13/running-a-multi-broker-apache-kafka-cluster-on-a-single-node/.
   - **Topic CLIs**:
       - Create topic: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 --replication-factor 2`
       - List topics: `kafka-topics.sh --zookeeper 127.0.0.1:2181 --list`
