@@ -38,7 +38,7 @@
      - Once data is written to a partition it cannot be changed.
      
   ## Kafka Cluster:
-   - A kafka cluster consist of multiple brokers.
+   - A kafka cluster consist of multiple brokers.https://www.michael-noll.com/blog/2013/03/13/running-a-multi-broker-apache-kafka-cluster-on-a-single-node/.
    - Each broker consist of topic partitions. Partitions from one topic are distributed among the brokers.
    - If we connect to one broker, we will be connected to all brokers.
    - Topic should have replication factor of atleast 2. The topic partition should be duplicated among brokers, so that if one broker goes down another broker can serve the topic partition.
