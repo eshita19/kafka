@@ -10,6 +10,7 @@
    - Can scale to millions of messages per second.
  - High performance - latency less than 10ms - real time.
  - https://techbeacon.com/app-dev-testing/what-apache-kafka-why-it-so-popular-should-you-use-it
+ - Kafka is like JMS publish Subscribe mechansim with messsage queue instead of topic, where only the active consumers will get message published at that time.
  
 # Use Cases:
  - Messaging system
