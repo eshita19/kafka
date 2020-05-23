@@ -9,6 +9,7 @@
    - Can scale to 100s brokers
    - Can scale to millions of messages per second.
  - High performance - latency less than 10ms - real time.
+ - https://techbeacon.com/app-dev-testing/what-apache-kafka-why-it-so-popular-should-you-use-it
  
 # Use Cases:
  - Messaging system
