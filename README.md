@@ -64,6 +64,10 @@
      - `max.in.flight.requests.per.connection` : 5 ( kafka >1.1)
      - `enable.idemptonce: true`: Prevents duplicate message sent to kafka.
      - `retries:Integer.max`: max number of retries.
+  - *Settings for a high throughout Producer*:
+    - `batch.size`: Batch size
+    - `linger.ms`: Linger millisecond
+    - `compression.type`: Compression type
   - The messages will be in order within a partition. But across multiple partition order is not guranteed.
      - If the producer doesn't provider key for messages, data will be sent to brokers in round robin fashion.
      - If the producer send key with message, message will be sent to particular broker using key hashing.
