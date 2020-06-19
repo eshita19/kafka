@@ -20,20 +20,20 @@ public class Producer {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		// Config properties of Producer
 		Properties configs = new Properties();
-		configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); //kafka port
+		configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); // kafka port
 		configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
-		for (int i = 0; i < 10; i++) {
-			try (KafkaProducer<String, String> producer = new KafkaProducer<String, String>(configs)) {
-				//Messages with a key will always go to same partition
+		try (KafkaProducer<String, String> producer = new KafkaProducer<String, String>(configs)) {
+			for (int i = 0; i < 10; i++) {
+				// Messages with a key will always go to same partition
 				ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC_NAME, "key" + i,
 						"This is message " + i);
 				producer.send(record, new Callback() {
 					@Override
 					public void onCompletion(RecordMetadata metadata, Exception e) {
 						// Message sent successfully
-						if (null  == e) {
+						if (null == e) {
 							logger.info("Message successfully sent: Topic: " + metadata.topic() + "Partition: "
 									+ metadata.partition());
 						}
