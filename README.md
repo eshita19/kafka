@@ -85,8 +85,15 @@
     - This helps in resuming the reading of data from the last left offset read from consumer offset topic.
     - Consumer choose when to commit offsets:
      - *At most once* : Offset is committed as soon as message is read, even if the processing of message might have failed which could lead to data loss. Means that for each message handed to the mechanism, that message is delivered zero or one times; in more casual terms it means that messages may be lost.
-     - *At least  once*:  Offsets are committed once message has been processed. If the processing goes wrong message will be read again. Means that for each message handed to the mechanism potentially multiple attempts are made at delivering it, such that at least one succeeds; again, in more casual terms this means that messages may be duplicated but not lost.
+     - *At least  once*:  Offsets are committed once message has been processed. If the processing goes wrong message will be read again. Means that for each message handed to the mechanism potentially multiple attempts are made at delivering it, such that at least one succeeds; again, in more casual terms this means that messages may be duplicated but not lost. Requires idempotent consumer.
      - *Exactly once*: Means that for each message handed to the mechanism exactly one delivery is made to the recipient; the message can neither be lost nor duplicated.
+ - **Consumer poll behaviour**:
+      - In most of messaging systems, the data is pushed to Consumers. But in kafka the data is polled by Consumer. They can control the amount of data to poll using various properties:
+         - *Fetch.min.bytes(default 1)*: Controls how much bytes you want to poll at least per request. > value, > throughput and < latency.
+         - *Max.poll.records(default 500)*: Controls how many records you want to receive per request.
+ - **Consumer offset strategies**:
+    - Auto commit(Default): *enable.auto.commit=true* : By default it is enabled. Offsets will be commited every 5 seconds. But this leds to at most once behaviour, as we don't know whether data was processed before committing offset.
+    - Manual commit: *enable.auto.commit=false* : Manual commit is better as we can control and get at least once semantics, i.e, offset is committed after data is processed.
      
   ## Kafka auto broker discovery:
    - Each kafka broker is named as bootstrap broker. Beacuse each broker has metadata of all other brokers,  whoch topic partition each broker hosts.
