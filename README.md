@@ -130,7 +130,9 @@
     - `kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group group1 --topic first_topic --reset-offsets --to-earliest`
     - Option `--shift-by` : Left shift(-) or right shift the offset in each partition. 
     
-
+## Kafka Connect:
+- https://docs.confluent.io/current/connect/index.html
+- 
 ## Twitter application:
 - https://developer.twitter.com/en/apps.
 - Twitter client: https://github.com/twitter/hbc.
