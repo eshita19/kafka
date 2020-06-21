@@ -87,6 +87,8 @@
      - *At most once* : Offset is committed as soon as message is read, even if the processing of message might have failed which could lead to data loss. Means that for each message handed to the mechanism, that message is delivered zero or one times; in more casual terms it means that messages may be lost.
      - *At least  once*:  Offsets are committed once message has been processed. If the processing goes wrong message will be read again. Means that for each message handed to the mechanism potentially multiple attempts are made at delivering it, such that at least one succeeds; again, in more casual terms this means that messages may be duplicated but not lost. Requires idempotent consumer.
      - *Exactly once*: Means that for each message handed to the mechanism exactly one delivery is made to the recipient; the message can neither be lost nor duplicated.
+   - *Reset offsets*: Reset offset using "auto.offset.reset"=latest/earliest/none.
+     
  - **Consumer poll behaviour**:
       - In most of messaging systems, the data is pushed to Consumers. But in kafka the data is polled by Consumer. They can control the amount of data to poll using various properties:
          - *Fetch.min.bytes(default 1)*: Controls how much bytes you want to poll at least per request. > value, > throughput and < latency.
