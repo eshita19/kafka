@@ -132,7 +132,8 @@
     
 ## Kafka Connect:
 - https://docs.confluent.io/current/connect/index.html
-- 
+- https://docs.confluent.io/current/connect/userguide.html
+
 ## Twitter application:
 - https://developer.twitter.com/en/apps.
 - Twitter client: https://github.com/twitter/hbc.
